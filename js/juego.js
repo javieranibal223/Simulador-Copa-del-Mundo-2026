@@ -6,11 +6,13 @@ class Juego {
 
     constructor() {
 
-        this.selecciones = [];
+    this.selecciones = [];
 
-        this.motorSorteo = null;
+    this.motorSorteo = null;
 
-    }
+    this.calendario = null;
+
+}
 
     async iniciar() {
 
@@ -37,6 +39,22 @@ class Juego {
     if (generado) {
 
         this.motorSorteo.mostrarGrupos();
+
+        this.calendario =
+
+            new Calendario(
+
+                this.motorSorteo.grupos
+
+            );
+
+        this.calendario.generar();
+
+        console.log(
+
+            this.calendario.partidos
+
+        );
 
     } else {
 
