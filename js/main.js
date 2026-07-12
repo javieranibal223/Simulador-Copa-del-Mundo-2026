@@ -1,18 +1,5 @@
-//====================================================
-// main.js
-// Punto de entrada
-//====================================================
+const app =
 
-window.addEventListener(
+    new App();
 
-    "load",
-
-    () => {
-
-        const juego = new Juego();
-
-        juego.iniciar();
-
-    }
-
-);
+app.iniciar();

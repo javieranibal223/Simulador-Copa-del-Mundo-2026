@@ -48,8 +48,122 @@ h1 {
 
 #app {
 
-    width: 90%;
+    width: 100%;
 
     margin: auto;
+
+    padding: 20px;
+
+}
+
+/*====================================================
+  Fase de grupos
+====================================================*/
+
+.grupos {
+
+    width: 95%;
+
+    max-width: 1400px;
+
+    margin: 40px auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+
+}
+
+.grupo {
+
+    background: #16345d;
+
+    border: 2px solid #2d5d9f;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,.35);
+
+    transition: .3s;
+
+}
+
+.grupo:hover {
+
+    transform: translateY(-4px);
+
+}
+
+.grupo h3 {
+
+    color: #ffd700;
+
+    margin-bottom: 15px;
+
+    font-size: 24px;
+
+    border-bottom: 2px solid #2d5d9f;
+
+    padding-bottom: 10px;
+
+}
+
+.grupo ul {
+
+    list-style: none;
+
+}
+
+.grupo li {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 8px 0;
+
+    text-align: left;
+
+    font-size: 18px;
+
+}
+
+.grupo img {
+
+    width: 32px;
+
+    height: 22px;
+
+    border-radius: 3px;
+
+}
+
+/* Tablets */
+
+@media (max-width:1100px){
+
+    .grupos{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+/* Celulares */
+
+@media (max-width:700px){
+
+    .grupos{
+
+        grid-template-columns:1fr;
+
+    }
 
 }
