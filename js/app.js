@@ -12,13 +12,7 @@ class App {
 
     constructor() {
 
-        this.app =
-
-            document.getElementById(
-
-                "app"
-
-            );
+        this.app = document.getElementById("app");
 
     }
 
@@ -44,11 +38,7 @@ class App {
 
         <section class="inicio">
 
-            <h2>
-
-                World Cup Simulator 2026
-
-            </h2>
+            <h2>World Cup Simulator 2026</h2>
 
             <p>
 
@@ -68,11 +58,7 @@ class App {
 
         document
 
-            .getElementById(
-
-                "btnNuevo"
-
-            )
+            .getElementById("btnNuevo")
 
             .addEventListener(
 
@@ -92,10 +78,6 @@ class App {
     // Nuevo Mundial
     //====================================================
 
-        //====================================================
-    // Nuevo Mundial
-    //====================================================
-
     async nuevoMundial() {
 
         console.clear();
@@ -108,9 +90,7 @@ class App {
 
         console.log("==============================");
 
-        const juego =
-
-            new Juego();
+        const juego = new Juego();
 
         await juego.iniciar();
 
@@ -128,15 +108,15 @@ class App {
 
         juego.calendario.generar();
 
-        this.mostrarGrupos(
+        this.mostrarCalendario(
 
-            juego.motorSorteo.grupos
+            juego.calendario.partidos
 
         );
 
     }
 
-        //====================================================
+    //====================================================
     // Mostrar grupos
     //====================================================
 
@@ -150,7 +130,7 @@ class App {
 
             <h2>
 
-                Fase de Grupos
+                Fase de grupos
 
             </h2>
 
@@ -228,4 +208,149 @@ class App {
 
     }
 
+    //====================================================
+    // Mostrar calendario
+    //====================================================
+
+    mostrarCalendario(partidos) {
+
+        let html =
+
+        `
+
+        <section class="calendario">
+
+            <h2>
+
+                Calendario
+
+            </h2>
+
+        `;
+
+        partidos.forEach(
+
+            (partido, indice) => {
+
+                html +=
+
+                `
+
+                <div class="partido">
+
+                    <div class="encabezado">
+
+                        Partido ${indice + 1}
+
+                    </div>
+
+                    <div class="equipos">
+
+                        <span>
+
+                            ${partido.local.nombre}
+
+                        </span>
+
+                        <strong>
+
+                            VS
+
+                        </strong>
+
+                        <span>
+
+                            ${partido.visitante.nombre}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+
+        );
+
+        html +=
+
+        `
+
+            <button id="btnSimular">
+
+                Simular Mundial
+
+            </button>
+
+        </section>
+
+        `;
+
+        this.app.innerHTML = html;
+
+        document
+
+            .getElementById("btnSimular")
+
+            .addEventListener(
+
+                "click",
+
+                () => {
+
+                    this.simularMundial();
+
+                }
+
+            );
+
+    }
+
+    //====================================================
+    // Simular Mundial
+    //====================================================
+
+    simularMundial() {
+
+        console.clear();
+
+        console.log("");
+
+        console.log("==============================");
+
+        console.log("SIMULANDO MUNDIAL");
+
+        console.log("==============================");
+
+        const partidos =
+
+            Guardar.cargar(
+
+                "partidos"
+
+            );
+
+        const simulador =
+
+            new Simulador(
+
+                partidos
+
+            );
+
+        simulador.simularTodos();
+
+        simulador.mostrarResultados();
+
+        alert(
+
+            "La simulación terminó.\n\nRevisá la consola."
+
+        );
+
+    }
+
 }
+
