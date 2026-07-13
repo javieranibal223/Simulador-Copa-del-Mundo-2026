@@ -22,23 +22,19 @@ class Eliminatorias {
 
         this.semifinales = [];
 
-        this.tercerPuesto = null;
-
-        this.final = null;
+        this.final = [];
 
         this.campeon = null;
 
     }
 
     //====================================================
-    // Generar cuadro
+    // Generar cuadro inicial
     //====================================================
 
     generar() {
 
         this.generarDieciseisavos();
-
-        this.guardar();
 
         console.log("");
 
@@ -98,8 +94,8 @@ class Eliminatorias {
 
     }
 
-        //====================================================
-    // Simular una ronda eliminatoria
+    //====================================================
+    // Simular una ronda
     //====================================================
 
     simularRonda(ronda) {
@@ -215,7 +211,7 @@ class Eliminatorias {
     }
 
     //====================================================
-    // Generar octavos de final
+    // Octavos
     //====================================================
 
     generarOctavos() {
@@ -238,8 +234,8 @@ class Eliminatorias {
 
     }
 
-        //====================================================
-    // Generar cuartos de final
+    //====================================================
+    // Cuartos
     //====================================================
 
     generarCuartos() {
@@ -263,7 +259,7 @@ class Eliminatorias {
     }
 
     //====================================================
-    // Generar semifinales
+    // Semifinales
     //====================================================
 
     generarSemifinales() {
@@ -287,7 +283,7 @@ class Eliminatorias {
     }
 
     //====================================================
-    // Generar final
+    // Final
     //====================================================
 
     generarFinal() {
@@ -331,6 +327,112 @@ class Eliminatorias {
     }
 
     //====================================================
+    // Simular eliminatorias completas
+    //====================================================
+
+    simular() {
+
+        this.generar();
+
+        this.generarOctavos();
+
+        this.mostrarRonda(
+
+            "DIECISEISAVOS",
+
+            this.dieciseisavos
+
+        );
+
+        this.generarCuartos();
+
+        this.mostrarRonda(
+
+            "OCTAVOS",
+
+            this.octavos
+
+        );
+
+        this.generarSemifinales();
+
+        this.mostrarRonda(
+
+            "CUARTOS",
+
+            this.cuartos
+
+        );
+
+        this.generarFinal();
+
+        this.mostrarRonda(
+
+            "SEMIFINALES",
+
+            this.semifinales
+
+        );
+
+        this.obtenerCampeon();
+
+        this.mostrarRonda(
+
+            "FINAL",
+
+            this.final
+
+        );
+
+        this.guardar();
+
+        this.mostrarCampeon();
+
+    }
+
+    //====================================================
+    // Mostrar una ronda
+    //====================================================
+
+    mostrarRonda(nombre, ronda) {
+
+        console.log("");
+
+        console.log("==============================");
+
+        console.log(nombre);
+
+        console.log("==============================");
+
+        ronda.forEach(
+
+            partido => {
+
+                console.log(
+
+                    partido.local.equipo.nombre +
+
+                    " " +
+
+                    partido.golesLocal +
+
+                    " - " +
+
+                    partido.golesVisitante +
+
+                    " " +
+
+                    partido.visitante.equipo.nombre
+
+                );
+
+            }
+
+        );
+
+    }
+
+    //====================================================
     // Mostrar campeón
     //====================================================
 
@@ -346,14 +448,24 @@ class Eliminatorias {
 
         console.log(
 
+            "🏆 " +
+
             this.campeon.equipo.nombre
+
+        );
+
+        console.log(
+
+            "Ranking FIFA:",
+
+            this.campeon.equipo.ranking
 
         );
 
     }
 
     //====================================================
-    // Guardar eliminatorias
+    // Guardar
     //====================================================
 
     guardar() {
