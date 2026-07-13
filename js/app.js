@@ -308,49 +308,179 @@ class App {
 
     }
 
-    //====================================================
-    // Simular Mundial
-    //====================================================
+    ////====================================================
+// Simular Mundial
+//====================================================
 
-    simularMundial() {
+simularMundial() {
 
-        console.clear();
+    console.clear();
 
-        console.log("");
+    console.log("");
 
-        console.log("==============================");
+    console.log("==============================");
 
-        console.log("SIMULANDO MUNDIAL");
+    console.log("SIMULANDO MUNDIAL");
 
-        console.log("==============================");
+    console.log("==============================");
 
-        const partidos =
+    // Simular partidos
 
-            Guardar.cargar(
+    const partidos =
 
-                "partidos"
+        Guardar.cargar(
 
-            );
-
-        const simulador =
-
-            new Simulador(
-
-                partidos
-
-            );
-
-        simulador.simularTodos();
-
-        simulador.mostrarResultados();
-
-        alert(
-
-            "La simulación terminó.\n\nRevisá la consola."
+            "partidos"
 
         );
 
-    }
+    const simulador =
+
+        new Simulador(
+
+            partidos
+
+        );
+
+    simulador.simularTodos();
+
+    simulador.mostrarResultados();
+
+    // Crear tablas
+
+    const grupos =
+
+        Guardar.cargar(
+
+            "grupos"
+
+        );
+
+    const tabla =
+
+        new Tabla(
+
+            grupos
+
+        );
+
+    tabla.crearTablas();
+
+    tabla.actualizar(partidos);
+
+    tabla.ordenarTodas();
+
+    // Clasificación
+
+    const clasificacion =
+
+        new Clasificacion(
+
+            tabla.tablas
+
+        );
+
+    clasificacion.generar();
+
+    clasificacion.mostrarClasificados();
+
+    // Eliminatorias
+
+    const eliminatorias =
+
+        new Eliminatorias(
+
+            clasificacion.clasificados
+
+        );
+
+    eliminatorias.simular();
+
+    eliminatorias.mostrarCampeon();
+
+    // Mostrar campeón en pantalla
+
+    this.mostrarCampeon(
+
+        eliminatorias.campeon
+
+    );
+
+}
+
+    //====================================================
+// Mostrar campeón
+//====================================================
+
+mostrarCampeon(campeon) {
+
+    this.app.innerHTML =
+
+    `
+
+    <section class="campeon">
+
+        <h2>
+
+            🏆 CAMPEÓN DEL MUNDIAL 2026
+
+        </h2>
+
+        <img
+
+            src="${campeon.equipo.bandera}"
+
+            class="bandera-campeon"
+
+        >
+
+        <h1>
+
+            ${campeon.equipo.nombre}
+
+        </h1>
+
+        <p>
+
+            Ranking FIFA #${campeon.equipo.ranking}
+
+        </p>
+
+        <br>
+
+        <button
+
+            id="btnNuevo">
+
+            Nuevo Mundial
+
+        </button>
+
+    </section>
+
+    `;
+
+    document
+
+        .getElementById(
+
+            "btnNuevo"
+
+        )
+
+        .addEventListener(
+
+            "click",
+
+            () => {
+
+                location.reload();
+
+            }
+
+        );
+
+}
 
 }
 
